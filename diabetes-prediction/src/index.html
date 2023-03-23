@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="Kedar_Koshti">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diabetese Prediction</title>
@@ -30,6 +31,8 @@
         SvgIcon,
         Link,
         Button,
+        TextField,
+        spacing,
       } = MaterialUI;
 
       // Create a theme instance.
@@ -82,14 +85,60 @@
       function App() {
         return (
           <Container maxWidth="sm">
-            <Box sx={{ my: 4 }}>
-              <Typography variant="h4" component="h1" gutterBottom>
-                Material UI CDN example
-            <Button variant="outlined">Outlined</Button>
-        </Typography>
-              <ProTip />
-              <Copyright />
-            </Box>
+            <Box sx={{ textAlign: 'center' }}>
+                <b><h1><u>Diabetes Predictor Form</u></h1></b>
+            </Box>    
+
+            <form id="survey-form" method="get" action="">
+                <p>
+                    <label for="pregnancy" class="form__label">Number of Time Pregnant</label> 
+                    <TextField id="pregnancy" label="Number of Time Pregnant" variant="filled" type="number" 
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                    /> 
+                </p>
+
+                <p>
+                    <label for="blood-pressure" class="form__label">Diastolic Blood Pressure</label>
+                    <TextField id="blood-pressure" label="Diastolic Blood Pressure" variant="filled" type="number" 
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                    /> 
+                </p>
+
+                <p>
+                    <label for="skin-fold-thickness" class="form__label">Tricep Skin Fold Thickness</label>
+                    <TextField id="skin-fold-thickness" label="Tricep Skin Fold Thickness" variant="filled" type="number" 
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                    /> 
+                </p>
+
+                <p>
+                    <label for="serum-insulin" class="form__label">2-Hour Serum Insulin</label>
+                    <TextField id="serum-insulin" label="2-Hour Serum Insulin" variant="filled" type="number" 
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                    /> 
+                </p>
+
+                <p>
+                    <label for="bmi" class="form__label">Body mass index</label>
+                    <TextField id="bmi" label="Body mass indexFilled" variant="filled" type="number" 
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                    /> 
+                </p>
+
+                <p>
+                    <label for="DPF" class="form__label">Diabetes Pedigree Function</label>
+                    <TextField type="number" id="DPF" label="Diabetes Pedigree Function" variant="filled" /> 
+                </p>
+                
+                <p>
+                    <label for="age" class="form__label">Age</label>
+                    <TextField type="number" id="age" label="Age" variant="filled"
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                    /> 
+                </p>
+
+                <Button sx={{ mx: 'auto', width: 200 }} variant="outlined">Predict!</Button>
+            </form>
           </Container>
         );
       }
