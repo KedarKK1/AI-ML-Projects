@@ -5,6 +5,10 @@ import os
 # then create a variable pwd 
 pwd = os.path.dirname(__file__)
 
+webcam = True
+
+cap = cv2.VideoCapture(0)
+
 detector = dlib.get_frontal_face_detector()
 # imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # faces = detector(imgGray)
@@ -16,7 +20,7 @@ predictor = dlib.shape_predictor(pwd + "/shape_predictor_68_face_landmarks.dat")
 def empty(a):
     pass
 cv2.namedWindow("BGR")
-cv2.resizeWindow("BGR", 640, 440)
+cv2.resizeWindow("BGR", 640, 240)
 cv2.createTrackbar("Blue", "BGR", 0, 255, empty)
 cv2.createTrackbar("Green", "BGR", 0, 255, empty)
 cv2.createTrackbar("Red", "BGR", 0, 255, empty)
@@ -41,8 +45,10 @@ def create_box(img, points, scale = 5, masked = False, cropped = True): # by def
 
 while True:
 
-    img = cv2.imread(pwd + "/2.PNG")
-    img = cv2.resize(img, (0,0), None, 0.5, 0.5)
+    if webcam: success_, img = cap.read()
+    else: img = cv2.imread(pwd + "/2.PNG")
+    # img = cv2.resize(img, (0,0), None, 0.5, 0.5)
+    img = cv2.resize(img, (0,0), None, 1, 1)
     imgOriginal = img.copy()
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = detector(imgGray)
