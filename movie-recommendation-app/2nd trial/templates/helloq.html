@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <label for="selectOption">Select an option:</label>
+        <select id="selectOption"></select>
+      </div>
+
+      <script>
+
+        $(document).ready(function() {
+            // Change event handler for the select element
+            $('#selectOption').on('change', function() {
+              var selectedOption = $(this).val();
+      
+              // AJAX request to the /getRecommendation route
+              $.ajax({
+                type: 'POST',
+                url: '/getRecommendation',
+                data: JSON.stringify({ selected_option: selectedOption }),
+                contentType: 'application/json', 
+                success: function(response) {
+                  // Handle the response
+                  console.log(response);
+                },
+                error: function(error) {
+                  console.error(error);
+                }
+              });
+            });
+        })
+
+        // Array of options
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectElement = document.getElementById('selectOption');
+      
+            // Make AJAX request to /getAllTitles
+            fetch('http://127.0.0.1:5000//getAllTitles')
+              .then(response => response.json())
+              .then(data => {
+                // Populate select element with options
+                data.forEach(title => {
+                  const optionElement = document.createElement('option');
+                  optionElement.text = title;
+                  selectElement.add(optionElement);
+                });
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
+          });
+      
+
+      </script>
+        
+</body>
+</html>
