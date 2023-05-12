@@ -4,24 +4,42 @@
 <head>
   <meta charset="UTF-8">
   <title>ML API</title>
+
+  <style>
+    h1{
+      text-align: "center";
+    }
+
+    .login{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .myInput{
+      min-width: 200px;
+      margin: 5px;
+    }
+  </style>
   
 </head>
 
 <body>
- <div class="login">
+ <div >
 	<h1>Employee Performance Prediction Model</h1>
 
      <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict_api')}}"method="post">
-      <input type="number" name="JobInvolvement" placeholder="JobInvolvement" required="required" /><br>
-    	<input type="number" name="holidaysTaken" placeholder="holidaysTaken" required="required" /><br>
-        <input type="number" name="socialWork" placeholder="socialWork" required="required" /><br>
-        <input type="number" name="softSkills" placeholder="softSkills" required="required" /><br>
-        <input type="number" name="skillSet" placeholder="skillSet" required="required" /><br>
-        <input type="number" name="extraHoursWorked" placeholder="extraHoursWorked" required="required" /><br>
-        <input type="number" name="punctuality" placeholder="punctuality" required="required" /><br>
-        <input type="number" name="quality" placeholder="quality" required="required" /><br>
-        <input type="number" name="productivity" placeholder="productivity" required="required" /><br>
+    <form action="{{ url_for('predict')}}" method="post" class="login">
+      <input type="number" class="myInput" name="JobInvolvement" placeholder="JobInvolvement" required="required" min="0" max="100" /><br>
+    	<input type="number" class="myInput" name="holidaysTaken" placeholder="holidaysTaken" required="required" min="0" /><br>
+        <input type="number" class="myInput" name="socialWork" placeholder="socialWork" required="required" min="0" max="5" /><br>
+        <input type="number" class="myInput" name="softSkills" placeholder="softSkills" required="required" min="0" max="5" /><br>
+        <input type="number" class="myInput" name="skillSet" placeholder="skillSet" required="required" min="0" max="5" /><br>
+        <input type="number" class="myInput" name="extraHoursWorked" placeholder="extraHoursWorked" required="required" /><br>
+        <input type="number" class="myInput" name="punctuality" placeholder="punctuality" required="required" min="0" max="100" /><br>
+        <input type="number" class="myInput" name="quality" placeholder="quality" required="required" min="0" max="100" /><br>
+        <input type="number" class="myInput" name="productivity" placeholder="productivity" required="required" min="0" max="100" /><br>
        
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
