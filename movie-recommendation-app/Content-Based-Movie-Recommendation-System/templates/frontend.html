@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <label for="selectOption">Select an option:</label>
+        <select id="selectOption"></select>
+        <div id="recommendations"></div>
+        {% for i in prediction_text %}
+          {{i}}
+        {% endfor %}
+
+      </div>
+
+      <script>
+        $(document).ready(function() {
+            $('#selectOption').on('change', function() {
+              var selectedOption = $(this).val();
+              $.ajax({
+                type: 'POST',
+                url: '/getRecommendation2',
+                data: JSON.stringify({ selected_option: selectedOption }),
+                contentType: 'application/json', 
+                success: function(response2) {
+                  console.log("response2 ", response2);
+                  var recommendationsElement = document.getElementById('recommendations');
+                  recommendationsElement.innerHTML = response2.recommendations.join('<br>');
+                },
+                error: function(error) {
+                  console.error(error);
+                }
+              });
+            });
+        })
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectElement = document.getElementById('selectOption');
+            fetch('http://127.0.0.1:5000/getAllTitles')
+              .then(response => response.json())
+              .then(data => {
+                console.log("data", data);
+                data.forEach(title => {
+                  const optionElement = document.createElement('option');
+                  optionElement.text = title;
+                  selectElement.add(optionElement);
+                });
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
+          });
+      </script>
+</body>
+</html>
